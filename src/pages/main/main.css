@@ -1,0 +1,19 @@
+.z-main{
+    width: 100%;
+    height: 100%;
+}
+.z-main-body{
+    position: relative;
+    width: 1080px;
+    height: 100%;
+    background-color: #e5e5e5;
+    margin: auto
+}
+.z-main-move{
+    position: relative;
+    top:200px;
+    left: 400px;
+    width: 100px;
+    height: 100px;
+    background-color: rgb(255, 255, 255)
+}
