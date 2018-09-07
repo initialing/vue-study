@@ -10,6 +10,7 @@
     </div>
 </template>
 <script>
+/* eslint-disable */
 export default {
     name: 'Main',
     data () {
@@ -20,13 +21,13 @@ export default {
     },
     methods: {
         move (e) {
-            console.log('sssss',e)
+            console.log('sssss', e)
             let odiv = e.target // 获取目标元素
             // 算出鼠标相对元素的位置
             let disX = e.clientX - odiv.offsetLeft
             let disY = e.clientY - odiv.offsetTop
             document.onmousemove = (e) => { // 鼠标按下并移动的事件
-            // 用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
+                // 用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
                 let left = e.clientX - disX
                 let top = e.clientY - disY
                 top = this.toppo(top)
