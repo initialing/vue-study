@@ -4,7 +4,7 @@ export default {
     data(){
         return {
             testarray:[],
-            arry2:[]
+            arry2:''
         }
     },
     methods:{
@@ -20,6 +20,19 @@ export default {
                 }
             } while (i <=1000);
             this.testarray = this.testarray.concat(this.arry2)
+        },
+        keyuphandle(e){
+            console.log(e)
+        },
+        rclickhandle(e){
+            console.log(e)
+            e.returnValue = false
+        },
+        dbclickhandle(){
+            alert('double dlick')
+        },
+        selecthandle(m){
+            console.log('select',m)
         }
     }
 }
