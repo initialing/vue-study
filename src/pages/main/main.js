@@ -1,10 +1,15 @@
 /* eslint-disable */
+import draggable from 'vuedraggable'
+
 export default {
     name: 'Main',
+    components:{draggable},
     data () {
         return {
             positionX: 0,
-            positionY: 0
+            positionY: 0,
+            myarray1:[{name:'a'},{name:'b'},{name:'c'},{name:'d'}],
+            myarray2:[{name:'1'},{name:'2'},{name:'3'},{name:'4'}],
         }
     },
     methods: {
@@ -52,6 +57,9 @@ export default {
                 }
             }
             return m
+        },
+        dragend(){
+            console.log(this.myarray1)
         }
     }
 }
