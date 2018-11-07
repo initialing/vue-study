@@ -3,6 +3,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/pages/main/main.vue'
 import Test from '@/pages/test/test.vue'
+import Algo from '@/pages/algorithm/algo.vue'
 
 Vue.use(Router)
 
@@ -17,6 +18,10 @@ export default new Router({
       path:'/test',
       name:'test',
       component:Test
+    },{
+      path:'/algo',
+      name:'algo',
+      component:Algo
     }
   ]
 })
