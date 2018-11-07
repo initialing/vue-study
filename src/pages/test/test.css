@@ -9,3 +9,47 @@
 .z-test-b{
     margin: 50px;
 }
+
+#n1{
+    position: relative;
+    left:20px;
+    width: 180px;
+    height: 180px;
+    background-color: #dddddd;
+}
+
+#n2{
+    position: relative;
+    width: 144px;
+    height: 144px;
+    border-radius: 100%;
+    background-color: #929292;
+    margin: auto;
+}
+
+#n3{
+    position: relative;
+    width: 108px;
+    height: 108px;
+    border-radius: 100%;
+    background-color: #797979;
+    margin: auto;
+}
+
+#n4{
+    position: relative;
+    width: 72px;
+    height: 72px;
+    border-radius: 100%;
+    background-color: #4b4b4b;
+    margin: auto;
+}
+
+#n5{
+    position: relative;
+    width: 36px;
+    height: 36px;
+    border-radius: 100%;
+    background-color: #2b2b2b;
+    margin: auto;
+}
