@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Main from '@/pages/main/main.vue'
 import Test from '@/pages/test/test.vue'
 import Algo from '@/pages/algorithm/algo.vue'
+import Koa from '@/pages/koa/koa.vue'
 
 Vue.use(Router)
 
@@ -22,6 +23,10 @@ export default new Router({
       path:'/algo',
       name:'algo',
       component:Algo
+    },{
+      path:'/koa',
+      name:'koa',
+      component:Koa
     }
   ]
 })

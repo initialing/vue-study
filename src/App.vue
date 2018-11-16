@@ -5,8 +5,12 @@
 </template>
 
 <script>
+/* eslint-disable */
+import Vue from 'vue'
+import vueResource from 'vue-resource'
+Vue.use(vueResource)
 export default {
-  name: 'App'
+  name: 'App',
 }
 </script>
 <style src="@/assets/css/base.css"></style>
