@@ -5,6 +5,7 @@
         </header>
         <article class="koa-get">
             <button class='koa-get-button' @click="getMethod">koa get</button>
+            <button class="koa-post-button" @click="postMethod">koa post</button>
         </article>
     </article>
 </template>
