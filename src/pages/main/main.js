@@ -1,5 +1,7 @@
 /* eslint-disable */
 import draggable from 'vuedraggable'
+// import Upload from 'iview'
+// import Button from 'iview'
 
 export default {
     name: 'Main',
@@ -10,6 +12,7 @@ export default {
             positionY: 0,
             myarray1:[{name:'a'},{name:'b'},{name:'c'},{name:'d'}],
             myarray2:[{name:'1'},{name:'2'},{name:'3'},{name:'4'}],
+            imgbase:''
         }
     },
     methods: {
@@ -60,6 +63,74 @@ export default {
         },
         dragend(){
             console.log(this.myarray1)
+        },
+        BeforeUpload(f){
+            // console.log('file',f)
+            let me = this
+            let datas = {}
+            // this.base(f)
+            let appkey = "59MiGNQTQrzdXbdt"
+            let reader = new FileReader()
+            let imgfile
+            reader.readAsDataURL(f)
+            reader.onload = e=>{
+                imgfile = e.target.result
+                datas['app_id'] = 2110493895
+                datas['time_stamp'] = f.lastModified
+                datas['nonce_str'] = me.randomWord(true,15,32)
+                // datas['image'] = this.imgbase.split('base64,')[1]
+                datas['image'] = imgfile.split('base64,')[1]
+                let ddd = me.getReqSign(datas,appkey)
+                datas['sign'] = ddd
+                console.log(datas)
+                console.log('ddd===>',ddd)
+                me.$http.post("https://api.ai.qq.com/fcgi-bin/image/image_terrorism",datas).then(res=>{
+                    console.log('res=====>',res)
+                })
+            }
+            return false
+        },
+        randomWord(randomFlag, min, max){
+            var str = "",
+                range = min,
+                arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+            if(randomFlag){
+                range = Math.round(Math.random() * (max-min)) + min;
+            }
+            for(var i=0; i<range; i++){
+                let pos = Math.round(Math.random() * (arr.length-1));
+                str += arr[pos];
+            }
+            return str;
+        },
+        getReqSign(datas,appkey){
+            let keys = []
+            for(let i in datas){
+                keys.push(i)
+            }
+            keys = keys.sort()
+            let str = ''
+            for(let j=0;j<keys.length;j++){
+                str=str + keys[j] + '=' + encodeURI(datas[keys[j]]) + '&'
+            }
+            str = str + 'app_key=' + appkey
+            let mstr = md5(str).toUpperCase()
+            return mstr
+        },
+        async getbase(f){
+            return new Promise((resolve,reject)=>{
+                let reader = new FileReader()
+                let imgfile
+                reader.readAsDataURL(f)
+                reader.onload = e=>{
+                    imgfile = e.target.result
+                    resolve(imgfile)
+                }
+            })
+        },
+        async base(f){
+            let ff = await this.getbase(f)
+            this.imgbase = ff
         }
     }
 }

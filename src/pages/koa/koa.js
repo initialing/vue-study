@@ -4,7 +4,8 @@ export default {
     name:'Koa',
     data(){
         return {
-            queryid:''
+            queryid:'',
+            datas:''
         }
     },
     methods:{
@@ -20,7 +21,8 @@ export default {
         },
         idMethod(){
             this.$http.get('http://127.0.0.1:8081/api/queryid/'+this.queryid,{params:{"name":'temp'}}).then(res=>{
-                console.log(res)
+            this.datas = res
+            console.log('this.datas',this.datas)
             })
         }
     }

@@ -14,6 +14,12 @@
                     <button v-for='(item,index) in myarray2' :key='index+item.name'>{{item.name}}</button>
                 </draggable>
             </div>
+            <article>
+                <p>上传图片</p>
+                <Upload :before-upload="BeforeUpload" action="//jsonplaceholder.typicode.com/posts/">
+                    <Button icon="ios-cloud-upload-outline">Upload files</Button>
+                </Upload>
+            </article>
         </div>
     </div>
 </template>
