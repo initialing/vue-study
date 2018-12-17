@@ -29,6 +29,9 @@ export default {
             console.timeEnd('bubble sort')
             this.sortout = temp.join(' ')               //按空格将数组拼接为字符串
         },
+        selectsort(){
+
+        },
         isnumarry(arr){
             for(let l=0;l<arr.length;l++){              //循环遍历
                 if(parseFloat(arr[l])){             //判断是否为纯字母，或字母开头的字符

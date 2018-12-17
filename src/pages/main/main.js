@@ -1,7 +1,5 @@
 /* eslint-disable */
 import draggable from 'vuedraggable'
-// import Upload from 'iview'
-// import Button from 'iview'
 
 export default {
     name: 'Main',
@@ -65,7 +63,7 @@ export default {
             console.log(this.myarray1)
         },
         BeforeUpload(f){
-            // console.log('file',f)
+            console.log('file',f)
             let me = this
             let datas = {}
             // this.base(f)
@@ -75,23 +73,44 @@ export default {
             reader.readAsDataURL(f)
             reader.onload = async e=>{
                 imgfile = e.target.result
-                datas['app_id'] = 2110493895
-                let times = new Date().getTime()
-                times = times.toString()
-                times = times.substring(0,10)
-                datas['time_stamp'] = parseInt(times)
-                datas['nonce_str'] = me.randomWord(true,15,32)
+                if(f.size/1024 > 100){
+                    let quality = 100*1024/f.size
+                    me.compressImg(imgfile,{w:quality,h:quality},(base)=>{
+                        let basedata = base
+                        console.log(basedata)
+                        basedata = basedata.split('base64,')[1]
+                        me.$http.post('http://127.0.0.1:8081/api/tencentai',{image:basedata},Headers={'Content-Type':'application/JSON'}).then(res=>{
+                            console.log(res)
+                        })
+                    })
+                }else{
+                    let basedata = imgfile.split('base64,')[1]
+                    console.log(imgfile)
+                    me.$http.post('http://127.0.0.1:8081/api/tencentai',{image:basedata},Headers={'Content-Type':'application/JSON'}).then(res=>{
+                        console.log(res)
+                    })
+                }
+                // datas['app_id'] = 2110493895
+                // let times = new Date().getTime()
+                // times = times.toString()
+                // times = times.substring(0,10)
+                // datas['time_stamp'] = parseInt(times)
+                // datas['nonce_str'] = me.randomWord(true,15,32)
                 // datas['image'] = imgfile
-                datas['image'] = imgfile.split('base64,')[1]
+                // datas['image'] = imgfile.split('base64,')[1]
+                // datas['topk'] = 5
                 // datas['image_url'] = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544690571192&di=a20f11325d332586292be443c5e8cd07&imgtype=0&src=http%3A%2F%2Fimg0.ph.126.net%2FRYh0GlXytfdbaPFMjUriyw%3D%3D%2F6598262736773960181.png'
-                let ddd = me.getReqSign(datas,appkey)
-                datas['sign'] = ddd
-                console.log(datas)
-                console.log('ddd===>',ddd)
-                console.log('image',datas.image)
-                me.$http.post("https://api.ai.qq.com/fcgi-bin/image/image_terrorism",datas).then(res=>{
-                    console.log('res=====>',res)
-                })
+                // let ddd = me.getReqSign(datas,appkey)
+                // datas['sign'] = ddd
+                // console.log(datas)
+                // console.log('ddd===>',ddd)
+                // console.log('image',datas.image)
+                // me.$http.post('http://127.0.0.1:8081/api/tencentai',{image:datas.image},Headers={'Content-Type':'application/JSON'}).then(res=>{
+                //     console.log(res)
+                // })
+                // me.$http.post("https://api.ai.qq.com/fcgi-bin/image/image_terrorism",datas).then(res=>{
+                //     console.log('res=====>',res)
+                // })
             }
             return false
         },
@@ -114,9 +133,9 @@ export default {
                 keys.push(i)
             }
             keys = keys.sort()
-            console.log('keys===>',keys)
+            // console.log('keys===>',keys)
             let str = ''
-            console.log('encode test====>',this.urlencode('疼 训'))
+            // console.log('encode test====>',this.urlencode('疼 训'))
             for(let j=0;j<keys.length;j++){
                 str=str + keys[j] + '=' + this.urlencode(datas[keys[j]]) + '&'
                 // str = str + keys[j] + '=' + datas[keys[j]] + '&'
@@ -200,6 +219,31 @@ export default {
             }
 
             return output;
+        },
+        compressImg(base,obj,callback){
+            let img = new Image()
+            img.src = base
+            img.onload = (e)=>{
+                let me = e.target
+                let w = me.width*obj.w
+                let h = me.height*obj.h
+                let quality = 0.2
+                let canvas = document.createElement('canvas')
+                let ctx = canvas.getContext('2d')
+                let anw = document.createAttribute('width')
+                anw.nodeValue = w
+                let anh = document.createAttribute('height')
+                anh.nodeValue = h
+                canvas.setAttributeNode(anw)
+                canvas.setAttributeNode(anh)
+                ctx.drawImage(me,0,0,w,h)
+                if(obj.quality && obj.quality>0 && obj.quality<=1){
+                    quality = obj.quality
+                    console.log('quality=========>',quality)
+                }
+                let base64 = canvas.toDataURL('image/jpeg',quality)
+                callback(base64)
+            }
         }
     }
 }

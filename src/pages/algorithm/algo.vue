@@ -12,6 +12,7 @@
             <textarea class='sort-output' readonly='readonly' v-model="sortout"></textarea>
             <footer>
                 <button class='bubble' @click="bubblesort">冒泡排序</button>
+                <button class="select" @click="selectsort">选择排序</button>
             </footer>
         </article>
     </article>
