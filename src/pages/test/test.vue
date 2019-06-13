@@ -15,6 +15,11 @@
                 </div>
             </div>
         </div>
+        <article class="z-test-json">
+            <button @click="findkey" style="margin:0px 30px 0px 40px">查找</button>
+            <input v-model="jsonkey" type="text"/>
+            <p>{{jsonresult}}</p>
+        </article>
     </div>
 </template>
 <script src="./test.js"></script>

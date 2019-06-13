@@ -5,6 +5,7 @@ import Main from '@/pages/main/main.vue'
 import Test from '@/pages/test/test.vue'
 import Algo from '@/pages/algorithm/algo.vue'
 import Koa from '@/pages/koa/koa.vue'
+import Mobile from '@/pages/mobile/mobile.vue'
 
 Vue.use(Router)
 
@@ -27,6 +28,10 @@ export default new Router({
       path:'/koa',
       name:'koa',
       component:Koa
+    },{
+      path:'/mobile',
+      name:'mobile',
+      component:Mobile
     }
   ]
 })

@@ -1,0 +1,8 @@
+.vue-mobile{
+    width: 100%;
+    height: 100%;
+    background-color: bisque;
+}
+.vue-mobile input{
+    margin: 50px 50px 50px 50px;
+}

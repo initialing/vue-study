@@ -245,5 +245,9 @@ export default {
                 callback(base64)
             }
         }
-    }
+    },
+    mounted(){
+        // let user = users['P060']
+        // console.log(user)
+    },
 }
