@@ -1,16 +1,63 @@
 /* eslint-disable */
 import draggable from 'vuedraggable'
+import ZTree from '../../components/tree/tree.vue'
 
 export default {
     name: 'Main',
-    components:{draggable},
+    components:{draggable,ZTree},
     data () {
         return {
             positionX: 0,
             positionY: 0,
             myarray1:[{name:'a'},{name:'b'},{name:'c'},{name:'d'}],
             myarray2:[{name:'1'},{name:'2'},{name:'3'},{name:'4'}],
-            imgbase:''
+            imgbase:'',
+            treeData:[{
+                id: 1,
+                label: '一级 1',
+                children: [{
+                  id: 4,
+                  label: '二级 1-1',
+                  children: [{
+                    id: 9,
+                    label: '三级 1-1-1'
+                  }, {
+                    id: 10,
+                    label: '三级 1-1-2'
+                  }]
+                }]
+              }, {
+                id: 2,
+                label: '一级 2',
+                children: [{
+                  id: 5,
+                  label: '二级 2-1'
+                }, {
+                  id: 6,
+                  label: '二级 2-2'
+                }]
+              }, {
+                id: 3,
+                label: '一级 3',
+                children: [{
+                  id: 7,
+                  label: '二级 3-1'
+                }, {
+                  id: 8,
+                  label: '二级 3-2',
+                  children: [{
+                   id: 11,
+                    label: '三级 3-2-1'
+                  }, {
+                    id: 12,
+                    label: '三级 3-2-2'
+                  }, {
+                    id: 13,
+                    label: '三级 3-2-3'
+                  }]
+                }]
+              }],
+            inputv:'iiiiiii'
         }
     },
     methods: {
@@ -244,10 +291,13 @@ export default {
                 let base64 = canvas.toDataURL('image/jpeg',quality)
                 callback(base64)
             }
+        },
+        showtree(){
+
         }
     },
     mounted(){
         // let user = users['P060']
-        // console.log(user)
+        console.log('00000000')
     },
 }

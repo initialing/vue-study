@@ -20,6 +20,24 @@
                     <Button icon="ios-cloud-upload-outline">Upload files</Button>
                 </Upload>
             </article>
+            <article class="tree-one">
+                <el-tree
+                    :data='treeData'
+                    draggable
+                    node-key="id"
+                    >
+                </el-tree>
+            </article>
+            <button @click.stop="showtree">点击</button>
+            <input v-model="inputv"/>
+            <article class="tree-two">
+                <z-tree
+                    :data='treeData'
+                    :draggable='true'
+                    node-key="id"
+                    >
+                </z-tree>
+            </article>
         </div>
     </div>
 </template>
